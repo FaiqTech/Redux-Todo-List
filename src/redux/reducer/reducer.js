@@ -1,3 +1,4 @@
+//reducer.js
 const initialState = {
   list: [],
 };

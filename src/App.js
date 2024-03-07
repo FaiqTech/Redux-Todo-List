@@ -1,8 +1,10 @@
+// App.js
+
 import { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { getList } from "./redux/actions/actions";
+import { addList, getList } from "./redux/actions/actions";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -20,16 +22,16 @@ function App() {
 
   const handleAdd = async (e) => {
     e.preventDefault();
-    console.log(inputValue);
     setInputValue("");
-    await fetchData();
+    dispatch(addList({ id: list.length + 1, name: inputValue }));
   };
+
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
-    <>
+    <div className="container">
       <h1>TODO-LIST</h1>
       <form>
         <input
@@ -43,9 +45,13 @@ function App() {
         </button>
       </form>
       {list.map((item) => {
-        return <p key={item.id}>{item.name}</p>;
+        return (
+          <div key={item.id} className="list-item">
+            {item.name}
+          </div>
+        );
       })}
-    </>
+    </div>
   );
 }
 
