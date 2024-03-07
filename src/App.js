@@ -22,6 +22,7 @@ function App() {
 
   const handleAdd = async (e) => {
     e.preventDefault();
+    if (!inputValue.trim()) return;
     setInputValue("");
     dispatch(addList({ id: list.length + 1, name: inputValue }));
   };
