@@ -24,7 +24,16 @@ function App() {
     e.preventDefault();
     if (!inputValue.trim()) return;
     setInputValue("");
-    dispatch(addList({ id: list.length + 1, name: inputValue }));
+
+    try {
+      const response = await axios.post(`http://localhost:3000/users`, {
+        id: list.length + 1,
+        name: inputValue,
+      });
+      dispatch(addList(response.data));
+    } catch (error) {
+      console.error("Error adding data:", error);
+    }
   };
 
   useEffect(() => {
