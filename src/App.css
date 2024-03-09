@@ -45,8 +45,24 @@ button[type="submit"]:hover {
   margin-bottom: 10px;
   background-color: #f4f4f4;
   border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .list-item:hover {
   background-color: #e3e3e3;
+}
+
+.remove-button {
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  background-color: #c82333;
 }

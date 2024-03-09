@@ -12,3 +12,10 @@ export const addList = (item) => {
     payload: item,
   };
 };
+
+export const removeList = (id) => {
+  return {
+    type: "REMOVE_LIST",
+    payload: id,
+  };
+};
