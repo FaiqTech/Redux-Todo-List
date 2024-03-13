@@ -54,15 +54,27 @@ button[type="submit"]:hover {
   background-color: #e3e3e3;
 }
 
-.remove-button {
+.remove-button,
+.edit-button {
   padding: 5px 10px;
-  background-color: #dc3545;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
+.remove-button {
+  background-color: #dc3545; /* Red color */
+}
+
 .remove-button:hover {
-  background-color: #c82333;
+  background-color: #c82333; /* Darker red color */
+}
+
+.edit-button {
+  background-color: #28a745; /* Green color */
+}
+
+.edit-button:hover {
+  background-color: #218838; /* Darker green color */
 }

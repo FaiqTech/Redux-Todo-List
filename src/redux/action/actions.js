@@ -1,4 +1,4 @@
-//actions.js
+// actions.js
 export const getList = (data) => {
   return {
     type: "GET_LIST",
@@ -17,5 +17,12 @@ export const removeList = (id) => {
   return {
     type: "REMOVE_LIST",
     payload: id,
+  };
+};
+
+export const updateList = (updatedItem) => {
+  return {
+    type: "UPDATE_LIST",
+    payload: updatedItem,
   };
 };

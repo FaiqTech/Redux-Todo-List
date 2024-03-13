@@ -1,13 +1,13 @@
-// App.js
-
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { addList, getList, removeList } from "./redux/actions/actions";
+import { addList, getList, removeList } from "./redux/action/actions";
+import EditForm from "./components/EditForm/EditForm";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
+  const [editId, setEditId] = useState(null);
   const list = useSelector((state) => state.listReducer.list);
   const dispatch = useDispatch();
 
@@ -27,13 +27,17 @@ function App() {
 
     try {
       const response = await axios.post(`http://localhost:3000/users`, {
-        id: list.length + 1,
+        id: (list.length + 1).toString(),
         name: inputValue,
       });
       dispatch(addList(response.data));
     } catch (error) {
       console.error("Error adding data:", error);
     }
+  };
+
+  const handleEdit = (id) => {
+    setEditId(id);
   };
 
   const handleRemove = async (id) => {
@@ -43,6 +47,10 @@ function App() {
     } catch (error) {
       console.error("Error removing data:", error);
     }
+  };
+
+  const handleCancelEdit = () => {
+    setEditId(null);
   };
 
   useEffect(() => {
@@ -63,13 +71,31 @@ function App() {
       </form>
       {list.map((item) => (
         <div key={item.id} className="list-item">
-          <span>{item.name}</span>
-          <button
-            className="remove-button"
-            onClick={() => handleRemove(item.id)}
-          >
-            Remove
-          </button>
+          {editId === item.id ? (
+            <EditForm
+              id={item.id}
+              initialValue={item.name}
+              onCancel={handleCancelEdit}
+            />
+          ) : (
+            <>
+              <span>{item.name}</span>
+              <div>
+                <button
+                  className="edit-button"
+                  onClick={() => handleEdit(item.id)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="remove-button"
+                  onClick={() => handleRemove(item.id)}
+                >
+                  Remove
+                </button>
+              </div>
+            </>
+          )}
         </div>
       ))}
     </div>

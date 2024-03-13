@@ -1,7 +1,8 @@
-//reducer.js
+// reducer.js
 const initialState = {
   list: [],
 };
+
 export const listReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_LIST":
@@ -18,6 +19,13 @@ export const listReducer = (state = initialState, action) => {
       return {
         ...state,
         list: state.list.filter((item) => item.id !== action.payload),
+      };
+    case "UPDATE_LIST":
+      return {
+        ...state,
+        list: state.list.map((item) =>
+          item.id === action.payload.id ? action.payload : item
+        ),
       };
     default:
       return state;
